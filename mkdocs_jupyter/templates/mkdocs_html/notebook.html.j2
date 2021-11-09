@@ -79,6 +79,9 @@
     <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         {% set cell_tags = cell["metadata"].get("tags", [])%}
         {% if cell_tags %}
+            {% if "cor" in cell_tags %}
+              <details class="solution"><summary>Solution</summary>
+            {% endif %}
             <div class="celltoolbar">
                 {% for cell in cell_tags %}
                 <div class="button_container tags_button_container">
@@ -102,6 +105,9 @@
         <div class="CodeMirror cm-s-jupyter">
             {{ cell.source | highlight_code(metadata=cell.metadata) }}
         </div>
+        {% if "cor" in cell_tags %}
+        </details>
+        {% endif %}
     </div>
 {% endblock input %}
 
