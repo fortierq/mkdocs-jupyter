@@ -80,9 +80,9 @@
       {{ super() }}
     </details>
     {% elif "exo" in cell_tags %}
-    <details class="note"><summary>Exercice</summary>
+    <div class="admonition note">
       {{ super() | replace("Exercice :", "") }}
-    </details>
+    </div>
     {% else %}
       {{ super() }}
     {% endif %}
