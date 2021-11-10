@@ -81,10 +81,10 @@
     </details>
     {% elif "exo" in cell_tags %}
     <details class="note"><summary>Exercice</summary>
-      {{ super() }}
+      {{ super() | replace("Exercice :", "") }}
     </details>
     {% else %}
-      {{ super() | replace("Exercice :", "") }}
+      {{ super() }}
     {% endif %}
 {% endblock any_cell %}
 
