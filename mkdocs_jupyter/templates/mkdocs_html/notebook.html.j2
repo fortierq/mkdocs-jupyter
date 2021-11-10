@@ -76,22 +76,11 @@
 {%- set vars = {"cell_id": 0 } -%}
 {% block input %}
     {%- set _ = vars.update({"cell_id": vars.cell_id + 1 }) -%}
+    {% set cell_tags = cell["metadata"].get("tags", [])%}
+    {% if "cor" in cell_tags %}
+        <details class="success"><summary>Solution</summary>
+    {% endif %}
     <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-        {% set cell_tags = cell["metadata"].get("tags", [])%}
-        {% if cell_tags %}
-            {% if "cor" in cell_tags %}
-              <details class="solution"><summary>Solution</summary>
-            {% endif %}
-            <div class="celltoolbar">
-                {% for cell in cell_tags %}
-                <div class="button_container tags_button_container">
-                    <span class="tag-container">
-                        <span class="cell-tag">{{ cell }}</span>
-                    </span>
-                </div>
-                {% endfor %}
-            </div>
-        {% endif %}
         <div class="zeroclipboard-container">
             <clipboard-copy for="cell-{{ vars.cell_id }}">
             <div>
@@ -105,10 +94,10 @@
         <div class="CodeMirror cm-s-jupyter">
             {{ cell.source | highlight_code(metadata=cell.metadata) }}
         </div>
-        {% if "cor" in cell_tags %}
-        </details>
-        {% endif %}
     </div>
+    {% if "cor" in cell_tags %}
+      </details>
+    {% endif %}
 {% endblock input %}
 
 {% block codecell %}
