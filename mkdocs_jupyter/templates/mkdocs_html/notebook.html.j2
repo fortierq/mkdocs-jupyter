@@ -77,7 +77,9 @@
     {% set cell_tags = cell["metadata"].get("tags", [])%}
     {% if "cor" in cell_tags %}
     <details class="success"><summary>Solution</summary>
+    {% endif %}
         {{ super() }}
+    {% if "cor" in cell_tags %}
     </details>
     {% endif %}
 {% endblock any_cell %}
