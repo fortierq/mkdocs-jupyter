@@ -73,13 +73,19 @@
 2. Add clipboard-copy button
     1. Add a wrapper with the ID for the clipboard button
 #}
+{% block any_cell %}
+    {% set cell_tags = cell["metadata"].get("tags", [])%}
+    {% if "cor" in cell_tags %}
+    <details class="success"><summary>Solution</summary>
+        {{ super() }}
+    </details>
+    {% endif %}
+{% endblock any_cell %}
+
 {%- set vars = {"cell_id": 0 } -%}
 {% block input %}
     {%- set _ = vars.update({"cell_id": vars.cell_id + 1 }) -%}
     {% set cell_tags = cell["metadata"].get("tags", [])%}
-    {% if "cor" in cell_tags %}
-        <details class="success"><summary>Solution</summary>
-    {% endif %}
     <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         <div class="zeroclipboard-container">
             <clipboard-copy for="cell-{{ vars.cell_id }}">
@@ -95,9 +101,6 @@
             {{ cell.source | highlight_code(metadata=cell.metadata) }}
         </div>
     </div>
-    {% if "cor" in cell_tags %}
-      </details>
-    {% endif %}
 {% endblock input %}
 
 {% block codecell %}
