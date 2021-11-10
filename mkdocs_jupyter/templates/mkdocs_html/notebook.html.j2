@@ -74,13 +74,17 @@
     1. Add a wrapper with the ID for the clipboard button
 #}
 {% block any_cell %}
-    {% set cell_tags = cell["metadata"].get("tags", [])%}
+    {% set cell_tags = cell["metadata"].get("tags", []) %}
     {% if "cor" in cell_tags %}
     <details class="success"><summary>Solution</summary>
-    {% endif %}
-        {{ super() }}
-    {% if "cor" in cell_tags %}
+      {{ super() }}
     </details>
+    {% elif "exo" in cell_tags %}
+    <details class="note"><summary>Exercice</summary>
+      {{ super() }}
+    </details>
+    {% else %}
+      {{ super() | replace("Exercice :", "") }}
     {% endif %}
 {% endblock any_cell %}
 
