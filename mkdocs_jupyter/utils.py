@@ -8,9 +8,9 @@ def slugify(value):
     underscores) and converts spaces to hyphens. Also strips leading and
     trailing whitespace.
     """
-    value = re.sub(r"[éè]", "e", value)
-    value = re.sub(r"[à]", "a", value)
-    value = re.sub(r"[']", "", value)
+    value = re.sub("[éè]", "e", value)
+    value = re.sub("[à]", "a", value)
+    value = re.sub("'", "", value)
     value = (
         unicodedata.normalize("NFKD", value)
         .encode("ascii", "ignore")
