@@ -26,7 +26,7 @@ def add_anchor_lower_id(html, anchor_link_text="¶"):
     except Exception:
         # failed to parse, just return it unmodified
         return html
-    link = slugify(_convert_header_id(html2text(h)))
+    link = _convert_header_id(slugify(html2text(h))))
     h.set("id", link)
     a = Element("a", {"class": "anchor-link", "href": "#" + link})
     try:
