@@ -43,6 +43,10 @@ def add_anchor_lower_id(html, anchor_link_text="¶"):
 
 def new_header(self, text, level, raw=None):
     html = super(IPythonRenderer, self).header(text, level, raw=raw)
+    html = re.sub("[éè]", "e", html)
+    html = re.sub("[à]", "a", html)
+    html = re.sub("[']", "", html)
+
     anchor_link_text = self.options.get("anchor_link_text", "¶")
     return add_anchor_lower_id(html, anchor_link_text=anchor_link_text)
 
