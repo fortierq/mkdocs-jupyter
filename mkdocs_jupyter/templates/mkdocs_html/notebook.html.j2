@@ -83,6 +83,10 @@
     <div class="admonition note">
       {{ super() | replace("Exercice :", "") }}
     </div>
+    {% elif "thm" in cell_tags %}
+    <div class="admonition note"> <p class=admonition-title>Théorème</p>
+      {{ super() }}
+    </div>
     {% else %}
       {{ super() }}
     {% endif %}
