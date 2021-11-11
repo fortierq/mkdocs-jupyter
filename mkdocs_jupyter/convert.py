@@ -1,3 +1,5 @@
+import re
+
 from nbconvert.filters.markdown_mistune import IPythonRenderer
 
 from mkdocs_jupyter.utils import slugify
