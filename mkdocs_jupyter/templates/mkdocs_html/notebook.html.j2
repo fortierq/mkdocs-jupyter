@@ -68,11 +68,17 @@
 </div>
 {% endblock body_footer %}
 
-{# ADDED:
-1. Show the tags on the cell toolbar
-2. Add clipboard-copy button
-    1. Add a wrapper with the ID for the clipboard button
-#}
+{% block markdowncell scoped %}
+<div class="jp-Cell-inputWrapper">
+{%- if resources.global_content_filter.include_input_prompt-%}
+    {{ self.empty_in_prompt() }}
+{%- endif -%}
+<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput {{ celltags(cell) }}" data-mime-type="text/markdown">
+{{ cell.source | replace("**Exercice** :", "") | replace("**Exercice**", "") | markdown2html | strip_files_prefix }}
+</div>
+</div>
+{%- endblock markdowncell %}
+
 {% block any_cell %}
     {% set cell_tags = cell["metadata"].get("tags", []) %}
     {% if "cor" in cell_tags %}
@@ -81,7 +87,7 @@
     </details>
     {% elif "exo" in cell_tags %}
     <div class="admonition note" style="font-size: 16px;"> <p class=admonition-title>Exercice</p>
-      {{ cell.source | replace("Exercice", "") }}
+      {{ super() }}
     </div>
     {% elif "thm" in cell_tags %}
     <div class="admonition note"> <p class=admonition-title>Important</p>
