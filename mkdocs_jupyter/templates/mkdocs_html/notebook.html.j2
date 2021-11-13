@@ -74,7 +74,7 @@
     {{ self.empty_in_prompt() }}
 {%- endif -%}
 <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput {{ celltags(cell) }}" data-mime-type="text/markdown">
-{{ cell.source | replace("**Exercice** :", "") | replace("**Exercice**", "") | markdown2html | strip_files_prefix }}
+      {{ cell.source | replace("**Exercice** :", "") | replace("**Exercice**", "") | markdown2html | strip_files_prefix }}
 </div>
 </div>
 {%- endblock markdowncell %}
@@ -82,7 +82,7 @@
 {% block any_cell %}
     {% set cell_tags = cell["metadata"].get("tags", []) %}
     {% if "cor" in cell_tags %}
-    <details class="success"><summary>Solution</summary>
+    <details class="success style="font-size: 16px;""><summary>Solution</summary>
       {{ super() }}
     </details>
     {% elif "exo" in cell_tags %}
