@@ -82,7 +82,7 @@
 {% block any_cell %}
     {% set cell_tags = cell["metadata"].get("tags", []) %}
     {% if "cor" in cell_tags %}
-    <details class="success style="font-size: 16px;""><summary>Solution</summary>
+    <details class="success" style="font-size: 16px;"><summary>Solution</summary>
       {{ super() }}
     </details>
     {% elif "exo" in cell_tags %}
