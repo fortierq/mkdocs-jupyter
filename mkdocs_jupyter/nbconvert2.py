@@ -100,6 +100,8 @@ def nb2html(
             with open(nb_path, "r") as f:
                 nb_json = json.load(f)
                 kernel_lang = nb_json["metadata"]["kernelspec"]["language"]
+                if kernel_lang.startswith("C++"):
+                    kernel_lang = "C++"
         except KeyError:
             pass
         content, resources = exporter.from_filename(nb_path)
