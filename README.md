@@ -1,9 +1,23 @@
-# mkdocs-jupyter: Use Jupyter Notebooks in mkdocs
+<p align="center">
+    <img src="https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/main/docs/logo.png" width="450px">
+</p>
 
-[![pypi](https://badge.fury.io/py/mkdocs-jupyter.svg)](https://pypi.org/project/mkdocs-jupyter/)
-[![build](https://github.com/danielfrg/mkdocs-jupyter/workflows/test/badge.svg)](https://github.com/danielfrg/mkdocs-jupyter/actions/workflows/test.yml)
-[![coverage](https://codecov.io/gh/danielfrg/mkdocs-jupyter/branch/main/graph/badge.svg)](https://codecov.io/gh/danielfrg/mkdocs-jupyter?branch=main)
-[![license](https://img.shields.io/:license-Apache%202-blue.svg)](https://github.com/danielfrg/mkdocs-jupyter/blob/master/LICENSE.txt)
+<p align="center">
+    <a href="https://pypi.org/project/mkdocs-jupyter/">
+        <img src="https://badge.fury.io/py/mkdocs-jupyter.svg">
+    </a>
+    <a href="https://github.com/danielfrg/mkdocs-jupyter/actions/workflows/test.yml">
+        <img src="https://github.com/danielfrg/mkdocs-jupyter/workflows/test/badge.svg">
+    </a>
+    <a href="https://codecov.io/gh/danielfrg/mkdocs-jupyter?branch=main">
+        <img src="https://codecov.io/gh/danielfrg/mkdocs-jupyter/branch/main/graph/badge.svg">
+    </a>
+    <a href="http://github.com/danielfrg/mkdocs-jupyter/blob/main/LICENSE.txt">
+        <img src="https://img.shields.io/:license-Apache%202-blue.svg">
+    </a>
+</p>
+
+# mkdocs-jupyter: Use Jupyter Notebooks in mkdocs
 
 - Add Jupyter Notebooks directly to the mkdocs navigation
 - Support for multiple formats:
@@ -15,16 +29,24 @@
 - Support for mkdocs TOC
 - Option to include notebook source
 
+
+
 <a href="https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/master/docs/mkdocs-theme.png"><img src="https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/master/docs/mkdocs-theme.png" alt="mkdocs-jupyter default theme"  width="410"></a>
 <a href="https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/master/docs/material-theme.png"><img src="https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/master/docs/material-theme.png" alt="mkdocs-jupyter material theme"  width="410"></a>
 
-## Usage
+## Demo website
+
+[Visit mkdocs-jupyter.danielfrg.com](https://mkdocs-jupyter.danielfrg.com/)
+
+## Installation
 
 ```shell
 pip install mkdocs-jupyter
 ```
 
-In your `mkdocs.yml`:
+## Configuration
+
+In the `mkdocs.yml` use Jupyter notebooks (`.ipynb`) or Python scripts (`.py`) as pages:
 
 ```yaml
 nav:
@@ -70,7 +92,16 @@ in the same markdown cell or new bottom markdown cells:
 ### This one will be displayed inside the above level
 ```
 
-## Options
+### Including or Ignoring Files
+
+You can control which files are included or ignored via lists of glob patterns:
+
+```yaml
+plugins:
+  - mkdocs-jupyter:
+      include: ["*.ipynb"]  # Default: ["*.py", "*.ipynb"]
+      ignore: ["some-irrelevant-files/*.ipynb"]
+```
 
 ### Execute Notebook
 
@@ -89,6 +120,17 @@ plugins:
   - mkdocs-jupyter:
       execute_ignore: "my-secret-files/*.ipynb"
 ```
+
+To fail when notebook execution fails set `allow_errors` to `false`:
+
+```yaml
+plugins:
+  - mkdocs-jupyter:
+      execute: true
+      allow_errors: false
+```
+
+#### Kernel
 
 By default the plugin will use the kernel specified in the notebook to execute it.
 You can specify a custom kernel name to use for all the notebooks:
@@ -133,7 +175,7 @@ For example in `mkdocs-material`
 (see [customization](https://squidfunk.github.io/mkdocs-material/customization/#overriding-template-blocks)),
 you can create a `main.html` file like this:
 
-```
+```jinja
 {% extends "base.html" %}
 
 {% block content %}
@@ -149,9 +191,9 @@ you can create a `main.html` file like this:
 
 ![Download Notebook button](https://raw.githubusercontent.com/danielfrg/mkdocs-jupyter/master/docs/download-button.png)
 
-## Styles
+### Styles
 
-This extensions includes the Juptyer Lab nbconvert CSS styles and does some changes
+This extensions includes the Jupyter Lab nbconvert CSS styles and does some changes
 to make it as generic as possible in order for it to work with a variety of mkdocs themes.
 This is not always possible and the theme we test the most is [mkdocs-material](https://squidfunk.github.io/mkdocs-material).
 
@@ -160,7 +202,7 @@ want, for example for the material theme take a look at their [customization doc
 
 Create a `main.html` file like:
 
-```
+```jinja
 {% extends "base.html" %}
 
 {% block content %}
