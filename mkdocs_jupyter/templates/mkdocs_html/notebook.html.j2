@@ -100,7 +100,7 @@
 {% block input %}
     {%- set _ = vars.update({"cell_id": vars.cell_id + 1 }) -%}
     {% set cell_tags = cell["metadata"].get("tags", [])%}
-    <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+    <div class="CodeMirror cm-s-jupyter">
         <div class="zeroclipboard-container">
             <clipboard-copy for="cell-{{ vars.cell_id }}">
             <div>
@@ -112,7 +112,6 @@
                 </div>
             </clipboard-copy>
         </div>
-        <div class="CodeMirror cm-s-jupyter">
             {{ cell.source | highlight_code(metadata=cell.metadata) }}
         </div>
     </div>
